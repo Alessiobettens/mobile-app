@@ -182,7 +182,7 @@ function ProductenScreen() {
   );
 }
 
-function CampussenScreen() {
+function CampussenScreen({ navigation }) {
   const [campussen, setCampussen] = useState([]);
 
   useEffect(() => {
@@ -208,37 +208,65 @@ function CampussenScreen() {
         data={campussen}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View
-            style={{
-              marginBottom: 20,
-              backgroundColor: "#fff",
-              borderRadius: 12,
-              padding: 12,
-              shadowColor: "#000",
-              shadowOpacity: 0.1,
-              shadowRadius: 5,
-              elevation: 3,
-            }}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CampusDetail", { item })}
           >
-            <Image
-              source={{
-                uri:
-                  item.fieldData.afbeelding?.url ||
-                  "https://via.placeholder.com/300",
+            <View
+              style={{
+                marginBottom: 20,
+                backgroundColor: "#fff",
+                borderRadius: 12,
+                padding: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowRadius: 5,
+                elevation: 3,
               }}
-              style={{ width: "100%", height: 150, borderRadius: 10 }}
-            />
+            >
+              <Image
+                source={{
+                  uri:
+                    item.fieldData.afbeelding?.url ||
+                    "https://via.placeholder.com/300",
+                }}
+                style={{ width: "100%", height: 150, borderRadius: 10 }}
+              />
 
-            <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-              {item.fieldData.name}
-            </Text>
+              <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
+                {item.fieldData.name}
+              </Text>
 
-            <Text style={{ color: "#555", marginTop: 5 }}>
-              {item.fieldData.adres}
-            </Text>
-          </View>
+              <Text style={{ color: "#555", marginTop: 5 }}>
+                {item.fieldData.adres}
+              </Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
+    </View>
+  );
+}
+
+function CampusDetailScreen({ route }) {
+  const { item } = route.params;
+
+  return (
+    <View style={{ flex: 1, padding: 20 }}>
+      <Image
+        source={{
+          uri:
+            item.fieldData.afbeelding?.url || "https://via.placeholder.com/300",
+        }}
+        style={{ width: "100%", height: 200, borderRadius: 10 }}
+      />
+
+      <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 10 }}>
+        {item.fieldData.name}
+      </Text>
+
+      <Text style={{ marginTop: 5 }}>{item.fieldData.adres}</Text>
+
+      <Text style={{ marginTop: 10 }}>Focus: {item.fieldData.focus}</Text>
     </View>
   );
 }
@@ -246,8 +274,31 @@ function CampussenScreen() {
 function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Nieuws" component={HomeScreen} />
+      <Stack.Screen
+        name="NieuwsHome"
+        component={HomeScreen}
+        options={{ title: "Nieuws" }}
+      />
+
       <Stack.Screen name="Detail" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function CampusStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Campussen"
+        component={CampussenScreen}
+        options={{ title: "Campussen" }}
+      />
+
+      <Stack.Screen
+        name="CampusDetail"
+        component={CampusDetailScreen}
+        options={{ title: "Campus" }}
+      />
     </Stack.Navigator>
   );
 }
@@ -288,7 +339,7 @@ export default function App() {
 
         <Tab.Screen
           name="Campussen"
-          component={CampussenScreen}
+          component={CampusStack}
           options={{ title: "Campussen" }}
         />
       </Tab.Navigator>
