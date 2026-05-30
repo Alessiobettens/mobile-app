@@ -102,7 +102,9 @@ function DetailScreen({ route }) {
       <Text style={{ marginTop: 10 }}>{item.fieldData.intro}</Text>
 
       <Text style={{ marginTop: 15, lineHeight: 20 }}>
-        {item.fieldData.inhoud || "Geen inhoud beschikbaar"}
+        {item.fieldData.inhoud
+          ? item.fieldData.inhoud.replace(/<[^>]*>/g, "")
+          : "Geen inhoud beschikbaar"}
       </Text>
     </ScrollView>
   );
