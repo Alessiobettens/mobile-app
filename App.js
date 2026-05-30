@@ -21,7 +21,9 @@ export default function App() {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <View
+      style={{ flex: 1, paddingHorizontal: 15, backgroundColor: "#f2f2f2" }}
+    >
       <FlatList
         data={news}
         keyExtractor={(item) => item.id}
@@ -30,8 +32,12 @@ export default function App() {
             style={{
               marginBottom: 20,
               backgroundColor: "#fff",
-              padding: 10,
-              borderRadius: 10,
+              borderRadius: 12,
+              padding: 12,
+              shadowColor: "#000",
+              shadowOpacity: 0.1,
+              shadowRadius: 5,
+              elevation: 3,
             }}
           >
             <Image
@@ -43,7 +49,9 @@ export default function App() {
               {item.fieldData.name}
             </Text>
 
-            <Text>{item.fieldData.intro}</Text>
+            <Text style={{ color: "#555", marginTop: 5 }}>
+              {item.fieldData.intro}
+            </Text>
           </View>
         )}
       />
