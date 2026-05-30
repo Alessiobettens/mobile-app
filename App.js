@@ -242,7 +242,6 @@ function CampussenScreen() {
   );
 }
 
-
 function HomeStack() {
   return (
     <Stack.Navigator>
@@ -256,9 +255,23 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Nieuws" component={HomeStack} />
-        <Tab.Screen name="Producten" component={ProductenScreen} />
-        <Tab.Screen name="Campussen" component={CampussenScreen} />
+        <Tab.Screen
+          name="Nieuws"
+          component={HomeStack}
+          options={{ title: "Nieuws" }}
+        />
+
+        <Tab.Screen
+          name="Producten"
+          component={ProductenScreen}
+          options={{ title: "Producten" }}
+        />
+
+        <Tab.Screen
+          name="Campussen"
+          component={CampussenScreen}
+          options={{ title: "Campussen" }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
