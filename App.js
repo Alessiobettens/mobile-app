@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, Image, TouchableOpacity, ScrollView } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -75,7 +75,7 @@ function DetailScreen({ route }) {
   const { item } = route.params;
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <ScrollView style={{ flex: 1, padding: 20 }}>
       <Image
         source={{ uri: item.fieldData.image.url }}
         style={{ width: "100%", height: 250, borderRadius: 10 }}
@@ -85,8 +85,16 @@ function DetailScreen({ route }) {
         {item.fieldData.name}
       </Text>
 
+      <Text style={{ color: "#888", marginTop: 5 }}>
+        {item.fieldData.datum}
+      </Text>
+
       <Text style={{ marginTop: 10 }}>{item.fieldData.intro}</Text>
-    </View>
+
+      <Text style={{ marginTop: 15, lineHeight: 20 }}>
+        {item.fieldData.inhoud || "Geen inhoud beschikbaar"}
+      </Text>
+    </ScrollView>
   );
 }
 
