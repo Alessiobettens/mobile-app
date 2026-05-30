@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 
 export default function App() {
   const [news, setNews] = useState([]);
@@ -26,10 +26,23 @@ export default function App() {
         data={news}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={{ marginBottom: 20 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+          <View
+            style={{
+              marginBottom: 20,
+              backgroundColor: "#fff",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            <Image
+              source={{ uri: item.fieldData.image.url }}
+              style={{ width: "100%", height: 200, borderRadius: 10 }}
+            />
+
+            <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
               {item.fieldData.name}
             </Text>
+
             <Text>{item.fieldData.intro}</Text>
           </View>
         )}
