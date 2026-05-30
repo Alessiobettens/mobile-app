@@ -267,6 +267,12 @@ function CampusDetailScreen({ route }) {
       <Text style={{ marginTop: 5 }}>{item.fieldData.adres}</Text>
 
       <Text style={{ marginTop: 10 }}>Focus: {item.fieldData.focus}</Text>
+
+      <Text style={{ marginTop: 10, lineHeight: 20 }}>
+        {item.fieldData["beschrijving-3"]?.replace(/<[^>]*>/g, "")}
+      </Text>
+
+      <Text>{JSON.stringify(item.fieldData, null, 2)}</Text>
     </View>
   );
 }
