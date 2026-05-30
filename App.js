@@ -95,8 +95,22 @@ function DetailScreen({ route }) {
         {item.fieldData.name}
       </Text>
 
-      <Text style={{ color: "#888", marginTop: 5 }}>
-        {item.fieldData.datum}
+      <Text
+        style={{
+          color: "#3c3939",
+          backgroundColor: "#86bc25",
+          borderRadius: 3,
+          marginTop: 5,
+          paddingHorizontal: 6, // beetje ruimte links/rechts
+          paddingVertical: 2,
+          alignSelf: "flex-start",
+        }}
+      >
+        {new Date(item.fieldData.datum).toLocaleDateString("nl-BE", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}
       </Text>
 
       <Text style={{ marginTop: 10 }}>{item.fieldData.intro}</Text>
