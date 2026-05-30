@@ -10,8 +10,10 @@ import {
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }) {
   const [news, setNews] = useState([]);
@@ -105,13 +107,39 @@ function DetailScreen({ route }) {
   );
 }
 
+function ProductenScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Producten scherm</Text>
+    </View>
+  );
+}
+
+function CampussenScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Campussen scherm</Text>
+    </View>
+  );
+}
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Nieuws" component={HomeScreen} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Nieuws" component={HomeScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Nieuws" component={HomeStack} />
+        <Tab.Screen name="Producten" component={ProductenScreen} />
+        <Tab.Screen name="Campussen" component={CampussenScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
