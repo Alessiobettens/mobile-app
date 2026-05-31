@@ -16,6 +16,28 @@ import { Ionicons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+function MainHomeScreen() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+      }}
+    >
+      <Image
+        source={require("./assets/logo.png")}
+        style={{ width: 200, height: 200, resizeMode: "contain" }}
+      />
+
+      <Text style={{ fontSize: 18, marginTop: 15 }}>
+        Welkom bij BA Atheneum
+      </Text>
+    </View>
+  );
+}
+
 function NieuwsScreen({ navigation }) {
   const [news, setNews] = useState([]);
 
@@ -311,7 +333,7 @@ function CampusStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Campussen"
+        name="CampussenHome"
         component={CampussenScreen}
         options={{ title: "Campussen" }}
       />
@@ -333,7 +355,9 @@ export default function App() {
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            if (route.name === "Nieuws") {
+            if (route.name === "Home") {
+              iconName = "home";
+            } else if (route.name === "Nieuws") {
               iconName = "newspaper";
             } else if (route.name === "Producten") {
               iconName = "cart";
@@ -347,6 +371,12 @@ export default function App() {
           tabBarInactiveTintColor: "gray",
         })}
       >
+        <Tab.Screen
+          name="Home"
+          component={MainHomeScreen}
+          options={{ title: "Home" }}
+        />
+
         <Tab.Screen
           name="Nieuws"
           component={HomeStack}
