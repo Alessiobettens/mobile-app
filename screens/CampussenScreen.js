@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList, TouchableOpacity, Image, Text } from "react-native";
+import CampusCard from "../components/CampusCard";
 
 export default function CampussenScreen({ navigation }) {
   const [campussen, setCampussen] = useState([]);
@@ -27,39 +28,7 @@ export default function CampussenScreen({ navigation }) {
         data={campussen}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CampusDetail", { item })}
-          >
-            <View
-              style={{
-                marginBottom: 20,
-                backgroundColor: "#fff",
-                borderRadius: 12,
-                padding: 12,
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 5,
-                elevation: 3,
-              }}
-            >
-              <Image
-                source={{
-                  uri:
-                    item.fieldData.afbeelding?.url ||
-                    "https://via.placeholder.com/300",
-                }}
-                style={{ width: "100%", height: 150, borderRadius: 10 }}
-              />
-
-              <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-                {item.fieldData.name}
-              </Text>
-
-              <Text style={{ color: "#555", marginTop: 5 }}>
-                {item.fieldData.adres}
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <CampusCard item={item} navigation={navigation} />
         )}
       />
     </View>
