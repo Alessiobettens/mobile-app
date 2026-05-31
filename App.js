@@ -18,23 +18,49 @@ const Tab = createBottomTabNavigator();
 
 function MainHomeScreen() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#fff",
-      }}
-    >
-      <Image
-        source={require("./assets/logo.png")}
-        style={{ width: 200, height: 200, resizeMode: "contain" }}
-      />
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
 
-      <Text style={{ fontSize: 18, marginTop: 15 }}>
-        Welkom bij BA Atheneum
-      </Text>
-    </View>
+      {/* HERO IMAGE */}
+      <View>
+        <Image
+          source={require ("./assets/main-image.jpg")}
+          style={{ width: "100%", height: 210 }}
+        />
+
+        {/* OVERLAY TEXT */}
+        <View
+          style={{
+            position: "absolute",
+            top: 90,
+            left: 20,
+            right: 20,
+          }}
+        >
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 26,
+              fontWeight: "bold",
+            }}
+          >
+            Welk talent bouw jij uit?
+          </Text>
+
+          <Text style={{ color: "#fff", marginTop: 5 }}>
+            Ontdek welke richting het best bij jouw talenten past.
+          </Text>
+        </View>
+      </View>
+
+      <View style={{ padding: 10, backgroundColor: "#f2f2f2"}}>
+        <Text style={{ lineHeight: 20 }}>
+          Busleyden Atheneum is de grootste en meest veelzijdige secundaire
+          school van Mechelen. In Busleyden Atheneum willen we dat je een
+          studierichting volgt die aansluit bij jouw talenten en interesses.
+        </Text>
+      </View>
+
+    </ScrollView>
   );
 }
 
