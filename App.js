@@ -16,7 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeScreen({ navigation }) {
+function NieuwsScreen({ navigation }) {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
@@ -298,7 +298,7 @@ function HomeStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="NieuwsHome"
-        component={HomeScreen}
+        component={NieuwsScreen}
         options={{ title: "Nieuws" }}
       />
 
