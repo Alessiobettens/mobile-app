@@ -25,4 +25,19 @@ export const styles = StyleSheet.create({
     color: "#555",
     marginTop: 5,
   },
+
+  button: {
+    marginHorizontal: 100,
+    backgroundColor: "#86bc25",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+  },
+
+  buttonText: {
+    color: "#ffffff",
+    fontWeight: "bold",
+    fontSize: 16,
+    alignSelf: "center",
+  },
 });

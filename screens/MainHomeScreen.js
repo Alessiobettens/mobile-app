@@ -1,5 +1,12 @@
 import React from "react";
-import { ScrollView, View, Text, Image, Button } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Image,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { styles } from "../styles/styles";
 
 export default function MainHomeScreen() {
@@ -47,17 +54,9 @@ export default function MainHomeScreen() {
         </Text>
       </View>
 
-      <View
-        style={{
-          marginTop: 20,
-          alignItems: "center",
-        }}
-      >
-        <Button
-          title="Start spel"
-          onPress={() => console.log("later spel openen")}
-        />
-      </View>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Start spel</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
