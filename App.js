@@ -1,360 +1,23 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
+import MainHomeScreen from "./screens/MainHomeScreen";
+import NieuwsScreen from "./screens/NieuwsScreen";
+import DetailScreen from "./screens/DetailScreen";
+import ProductenScreen from "./screens/ProductenScreen";
+import CampussenScreen from "./screens/CampussenScreen";
+import CampusDetailScreen from "./screens/CampusDetailScreen";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-function MainHomeScreen() {
-  return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-      {/* HERO IMAGE */}
-      <View>
-        <Image
-          source={require("./assets/main-image.jpg")}
-          style={{ width: "100%", height: 210 }}
-        />
-
-        {/* OVERLAY TEXT */}
-        <View
-          style={{
-            position: "absolute",
-            top: 100,
-            left: 20,
-            right: 20,
-          }}
-        >
-          <Text
-            style={{
-              color: "#ffffff",
-              fontSize: 26,
-              fontWeight: "bold",
-            }}
-          >
-            Welk talent bouw jij uit?
-          </Text>
-
-          <Text style={{ color: "#fff", marginTop: 5 }}>
-            Ontdek welke richting het best bij jouw talenten past.
-          </Text>
-        </View>
-      </View>
-
-      <View style={{ padding: 10, backgroundColor: "#f2f2f2" }}>
-        <Text style={{ lineHeight: 20 }}>
-          <Text style={{ fontWeight: "bold" }}>Busleyden Atheneum</Text> is de
-          grootste en meest veelzijdige secundaire school van Mechelen. In
-          Busleyden Atheneum willen we dat je een studierichting volgt die
-          aansluit bij{" "}
-          <Text style={{ fontWeight: "bold" }}>
-            jouw talenten en interesses
-          </Text>
-          . Leren gaat immers het best als je kan doen wat je graag doet en waar
-          je goed in bent. Daarom hebben we meer dan <Text style={{ fontWeight: "bold" }}>100 studieopties</Text>, verspreid
-          over <Text style={{ fontWeight: "bold" }}>zeven unieke campussen</Text> met elk een heel eigen sfeer en profiel.
-        </Text>
-      </View>
-    </ScrollView>
-  );
-}
-
-function NieuwsScreen({ navigation }) {
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://api.webflow.com/v2/collections/6a187372e300a789392b5df2/items",
-      {
-        headers: {
-          Authorization:
-            "Bearer c438614a6dd5bcd906bb481dd394634d08798782a180ff00c2a15243ac0da0b2",
-        },
-      },
-    )
-      .then((response) => response.json())
-      .then((data) => setNews(data.items || []))
-      .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <View
-      style={{ flex: 1, paddingHorizontal: 15, backgroundColor: "#f2f2f2" }}
-    >
-      <FlatList
-        data={news}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Detail", { item })}
-          >
-            <View
-              style={{
-                marginBottom: 20,
-                backgroundColor: "#fff",
-                borderRadius: 12,
-                padding: 12,
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 5,
-                elevation: 3,
-              }}
-            >
-              <Image
-                source={{
-                  uri: item.fieldData.image
-                    ? item.fieldData.image.url
-                    : "https://via.placeholder.com/300",
-                }}
-                style={{ width: "100%", height: 200, borderRadius: 10 }}
-              />
-
-              <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-                {item.fieldData.name || "Geen titel"}
-              </Text>
-
-              <Text style={{ color: "#555", marginTop: 5 }}>
-                {item.fieldData.intro}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
-}
-
-function DetailScreen({ route }) {
-  const { item } = route.params;
-
-  return (
-    <ScrollView style={{ flex: 1, padding: 20 }}>
-      <Image
-        source={{ uri: item.fieldData.image.url }}
-        style={{ width: "100%", height: 250, borderRadius: 10 }}
-      />
-
-      <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 10 }}>
-        {item.fieldData.name}
-      </Text>
-
-      <Text
-        style={{
-          color: "#3c3939",
-          backgroundColor: "#86bc25",
-          borderRadius: 3,
-          marginTop: 5,
-          paddingHorizontal: 6, // beetje ruimte links/rechts
-          paddingVertical: 2,
-          alignSelf: "flex-start",
-        }}
-      >
-        {new Date(item.fieldData.datum).toLocaleDateString("nl-BE", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
-      </Text>
-
-      <Text style={{ marginTop: 10 }}>{item.fieldData.intro}</Text>
-
-      <Text style={{ marginTop: 15, lineHeight: 20 }}>
-        {item.fieldData.inhoud
-          ? item.fieldData.inhoud.replace(/<[^>]*>/g, "")
-          : "Geen inhoud beschikbaar"}
-      </Text>
-    </ScrollView>
-  );
-}
-
-function ProductenScreen() {
-  const [products, setProducts] = useState([]);
-  const [skus, setSkus] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://api.webflow.com/v2/collections/6a04927dcf62d2e49fcf7e28/items",
-      {
-        headers: {
-          Authorization:
-            "Bearer c438614a6dd5bcd906bb481dd394634d08798782a180ff00c2a15243ac0da0b2",
-        },
-      },
-    )
-      .then((res) => res.json())
-      .then((data) => setProducts(data.items || []));
-
-    fetch(
-      "https://api.webflow.com/v2/sites/69fdf72b307dcc6cf820875b/products/skus",
-      {
-        headers: {
-          Authorization:
-            "Bearer c438614a6dd5bcd906bb481dd394634d08798782a180ff00c2a15243ac0da0b2",
-        },
-      },
-    )
-      .then((res) => res.json())
-      .then((data) => setSkus(data.items || []));
-  }, []);
-
-  return (
-    <View
-      style={{ flex: 1, paddingHorizontal: 15, backgroundColor: "#f2f2f2" }}
-    >
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          const sku = skus.find((s) => s.id === item.fieldData["default-sku"]);
-
-          return (
-            <View
-              style={{
-                marginBottom: 20,
-                backgroundColor: "#fff",
-                borderRadius: 12,
-                padding: 12,
-              }}
-            >
-              <Image
-                source={{
-                  uri:
-                    sku?.fieldData?.image?.url ||
-                    "https://via.placeholder.com/300",
-                }}
-                style={{ width: "100%", height: 150, borderRadius: 10 }}
-              />
-
-              <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-                {item.fieldData.name}
-              </Text>
-
-              <Text style={{ color: "#555", marginTop: 5 }}>
-                € {sku?.price?.value ? sku.price.value / 100 : "Geen prijs"}
-              </Text>
-            </View>
-          );
-          console.log(sku);
-        }}
-      />
-    </View>
-  );
-}
-
-function CampussenScreen({ navigation }) {
-  const [campussen, setCampussen] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://api.webflow.com/v2/collections/6a144846d533bf59fe87ca4b/items",
-      {
-        headers: {
-          Authorization:
-            "Bearer c438614a6dd5bcd906bb481dd394634d08798782a180ff00c2a15243ac0da0b2",
-        },
-      },
-    )
-      .then((res) => res.json())
-      .then((data) => setCampussen(data.items || []))
-      .catch((err) => console.error(err));
-  }, []);
-
-  return (
-    <View
-      style={{ flex: 1, paddingHorizontal: 15, backgroundColor: "#f2f2f2" }}
-    >
-      <FlatList
-        data={campussen}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CampusDetail", { item })}
-          >
-            <View
-              style={{
-                marginBottom: 20,
-                backgroundColor: "#fff",
-                borderRadius: 12,
-                padding: 12,
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 5,
-                elevation: 3,
-              }}
-            >
-              <Image
-                source={{
-                  uri:
-                    item.fieldData.afbeelding?.url ||
-                    "https://via.placeholder.com/300",
-                }}
-                style={{ width: "100%", height: 150, borderRadius: 10 }}
-              />
-
-              <Text style={{ fontSize: 18, fontWeight: "bold", marginTop: 10 }}>
-                {item.fieldData.name}
-              </Text>
-
-              <Text style={{ color: "#555", marginTop: 5 }}>
-                {item.fieldData.adres}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
-}
-
-function CampusDetailScreen({ route }) {
-  const { item } = route.params;
-
-  return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <Image
-        source={{
-          uri:
-            item.fieldData.afbeelding?.url || "https://via.placeholder.com/300",
-        }}
-        style={{ width: "100%", height: 200, borderRadius: 10 }}
-      />
-
-      <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 10 }}>
-        {item.fieldData.name}
-      </Text>
-
-      <Text style={{ marginTop: 5 }}>{item.fieldData.adres}</Text>
-
-      <Text style={{ marginTop: 10 }}>Focus: {item.fieldData.focus}</Text>
-
-      <Text style={{ marginTop: 10, lineHeight: 20 }}>
-        {item.fieldData["beschrijving-3"]?.replace(/<[^>]*>/g, "")}
-      </Text>
-
-      <Text>{JSON.stringify(item.fieldData, null, 2)}</Text>
-    </View>
-  );
-}
 
 function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="NieuwsHome"
-        component={NieuwsScreen}
-        options={{ title: "Nieuws" }}
-      />
-
+      <Stack.Screen name="NieuwsHome" component={NieuwsScreen} />
       <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
   );
@@ -363,17 +26,8 @@ function HomeStack() {
 function CampusStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="CampussenHome"
-        component={CampussenScreen}
-        options={{ title: "Campussen" }}
-      />
-
-      <Stack.Screen
-        name="CampusDetail"
-        component={CampusDetailScreen}
-        options={{ title: "Campus" }}
-      />
+      <Stack.Screen name="CampussenHome" component={CampussenScreen} />
+      <Stack.Screen name="CampusDetail" component={CampusDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -386,45 +40,22 @@ export default function App() {
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            if (route.name === "Home") {
-              iconName = "home";
-            } else if (route.name === "Nieuws") {
-              iconName = "newspaper";
-            } else if (route.name === "Producten") {
-              iconName = "cart";
-            } else if (route.name === "Campussen") {
-              iconName = "school";
-            }
+            if (route.name === "Home") iconName = "home";
+            else if (route.name === "Nieuws") iconName = "newspaper";
+            else if (route.name === "Producten") iconName = "cart";
+            else if (route.name === "Campussen") iconName = "school";
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#93ca30",
-          tabBarInactiveTintColor: "gray",
+
+          tabBarActiveTintColor: "#93ca30", // ✅ GROEN
+          tabBarInactiveTintColor: "#727271",
         })}
       >
-        <Tab.Screen
-          name="Home"
-          component={MainHomeScreen}
-          options={{ title: "Home" }}
-        />
-
-        <Tab.Screen
-          name="Nieuws"
-          component={HomeStack}
-          options={{ title: "Nieuws" }}
-        />
-
-        <Tab.Screen
-          name="Producten"
-          component={ProductenScreen}
-          options={{ title: "Producten" }}
-        />
-
-        <Tab.Screen
-          name="Campussen"
-          component={CampusStack}
-          options={{ title: "Campussen" }}
-        />
+        <Tab.Screen name="Home" component={MainHomeScreen} />
+        <Tab.Screen name="Nieuws" component={HomeStack} />
+        <Tab.Screen name="Producten" component={ProductenScreen} />
+        <Tab.Screen name="Campussen" component={CampusStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
