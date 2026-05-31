@@ -4,7 +4,9 @@ export const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     backgroundColor: "#e6e6e6",
-    padding: 12,
+    padding: 10,
+    borderRadius: 10,
+    overflow: "hidden",
   },
 
   image: {
@@ -22,5 +24,5 @@ export const styles = StyleSheet.create({
   intro: {
     color: "#555",
     marginTop: 5,
-  }
+  },
 });

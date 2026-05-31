@@ -7,8 +7,12 @@ export default function CampusCard({ item, navigation }) {
     <TouchableOpacity
       onPress={() => navigation.navigate("CampusDetail", { item })}
     >
-      <View style={styles.card}>
-        
+      <View
+        style={[
+          styles.card,
+          { backgroundColor: item.fieldData.kleur || "#fff" },
+        ]}
+      >
         <Image
           source={{
             uri:
@@ -18,14 +22,13 @@ export default function CampusCard({ item, navigation }) {
           style={styles.image}
         />
 
-        <Text style={styles.title}>
+        <Text style={[styles.title, { color: "#fff" }]}>
           {item.fieldData.name}
         </Text>
 
-        <Text style={styles.intro}>
+        <Text style={[styles.intro, { color: "#fff" }]}>
           {item.fieldData.adres}
         </Text>
-
       </View>
     </TouchableOpacity>
   );
