@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View, Text, Image } from "react-native";
+import { ScrollView, View, Text, Image, Button } from "react-native";
 import { styles } from "../styles/styles";
 
 export default function MainHomeScreen() {
@@ -45,6 +45,18 @@ export default function MainHomeScreen() {
           <Text style={{ fontWeight: "bold" }}>zeven unieke campussen</Text> met
           elk een eigen sfeer en profiel.
         </Text>
+      </View>
+
+      <View
+        style={{
+          marginTop: 20,
+          alignItems: "center",
+        }}
+      >
+        <Button
+          title="Start spel"
+          onPress={() => console.log("later spel openen")}
+        />
       </View>
     </ScrollView>
   );
