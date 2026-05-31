@@ -62,16 +62,19 @@ export default function CampusDetailScreen({ route }) {
           backgroundColor: "#ffffff",
           marginTop: 10,
           paddingVertical: 8,
-          paddingHorizontal: 30,
+          paddingHorizontal: 8,
           borderRadius: 5,
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "flex-start", // ✅ FIX
           width: "100%",
         }}
       >
-        <Text style={{ marginRight: 20 }}>📍</Text>
+        <Text style={{ marginRight: 8 }}>📍</Text>
 
-        <Text style={{ color: "#333" }}>{item.fieldData.adres}</Text>
+        <Text style={{ color: "#333", textAlign: "left" }}>
+          {item.fieldData.adres}
+        </Text>
       </View>
 
       <View
