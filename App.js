@@ -45,7 +45,8 @@ export default function App() {
             else if (route.name === "Nieuws") iconName = "newspaper";
             else if (route.name === "Producten") iconName = "cart";
             else if (route.name === "Campussen") iconName = "school";
-            else if (route.name === "Game") iconName = "gamepad";
+            else if (route.name === "Game")
+              iconName = "game-controller-outline";
             return <Ionicons name={iconName} size={size} color={color} />;
           },
 

@@ -6,7 +6,7 @@ export default function GameScreen() {
   return (
     <View style={{ flex: 1 }}>
       <WebView
-        source={{ uri: "https://boekenvanger.netlify.app/" }}  // ✅ later aanpassen
+        source={{ uri: "https://boekenvangergame.netlify.app/" }} // ✅ later aanpassen
       />
     </View>
   );
