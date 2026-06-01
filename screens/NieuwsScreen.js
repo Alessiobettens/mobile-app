@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, Image, Text } from "react-native";
+import { View, FlatList } from "react-native";
 import NewsCard from "../components/NewsCard";
 
 export default function NieuwsScreen({ navigation }) {
@@ -13,7 +13,7 @@ export default function NieuwsScreen({ navigation }) {
           Authorization:
             "Bearer c438614a6dd5bcd906bb481dd394634d08798782a180ff00c2a15243ac0da0b2",
         },
-      },
+      }
     )
       .then((response) => response.json())
       .then((data) => setNews(data.items || []))
@@ -22,7 +22,11 @@ export default function NieuwsScreen({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, paddingHorizontal: 15, backgroundColor: "#f2f2f2" }}
+      style={{
+        flex: 1,
+        paddingHorizontal: 15,
+        backgroundColor: "#f2f2f2",
+      }}
     >
       <FlatList
         data={news}
