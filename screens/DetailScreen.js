@@ -29,7 +29,7 @@ export default function DetailScreen({ route }) {
   console.log(categoryNames);
 
   return (
-    <ScrollView style={{ flex: 1, padding: 20 }}>
+    <ScrollView style={{ flex: 1, padding: 15 }}>
       <Image
         source={{ uri: item.fieldData.image.url }}
         style={{ width: "100%", height: 250, borderRadius: 10 }}

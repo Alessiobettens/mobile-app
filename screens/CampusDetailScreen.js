@@ -35,7 +35,7 @@ export default function CampusDetailScreen({ route }) {
         backgroundColor: item.fieldData.kleur || "#fff",
       }}
       contentContainerStyle={{
-        padding: 20,
+        padding: 15,
       }}
     >
       <Image
