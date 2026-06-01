@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { styles } from "../styles/styles";
 
-export default function MainHomeScreen() {
+export default function MainHomeScreen({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View>
@@ -54,7 +54,10 @@ export default function MainHomeScreen() {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Game")}
+      >
         <Text style={styles.buttonText}>Start spel</Text>
       </TouchableOpacity>
     </ScrollView>

@@ -10,6 +10,7 @@ import DetailScreen from "./screens/DetailScreen";
 import ProductenScreen from "./screens/ProductenScreen";
 import CampussenScreen from "./screens/CampussenScreen";
 import CampusDetailScreen from "./screens/CampusDetailScreen";
+import GameScreen from "./screens/GameScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,7 +45,7 @@ export default function App() {
             else if (route.name === "Nieuws") iconName = "newspaper";
             else if (route.name === "Producten") iconName = "cart";
             else if (route.name === "Campussen") iconName = "school";
-
+            else if (route.name === "Game") iconName = "gamepad";
             return <Ionicons name={iconName} size={size} color={color} />;
           },
 
@@ -56,6 +57,7 @@ export default function App() {
         <Tab.Screen name="Nieuws" component={HomeStack} />
         <Tab.Screen name="Producten" component={ProductenScreen} />
         <Tab.Screen name="Campussen" component={CampusStack} />
+        <Tab.Screen name="Game" component={GameScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
