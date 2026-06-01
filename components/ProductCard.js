@@ -11,7 +11,7 @@ export default function ProductCard({ item, navigation }) {
       onPress={() => navigation.navigate("ProductDetail", { item })}
       activeOpacity={0.8}
     >
-      <View style={styles.card}>
+      <View style={styles.productCard}>
         <Image
           source={{
             uri: image || "https://via.placeholder.com/300",

@@ -7,7 +7,7 @@ export default function NewsCard({ item, navigation }) {
     <TouchableOpacity
       onPress={() => navigation.navigate("Detail", { item })}
     >
-      <View style={styles.card}>
+      <View style={styles.productCard}>
         
         <Image
           source={{
