@@ -8,6 +8,7 @@ import MainHomeScreen from "./screens/MainHomeScreen";
 import NieuwsScreen from "./screens/NieuwsScreen";
 import DetailScreen from "./screens/DetailScreen";
 import ProductenScreen from "./screens/ProductenScreen";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
 import CampussenScreen from "./screens/CampussenScreen";
 import CampusDetailScreen from "./screens/CampusDetailScreen";
 import GameScreen from "./screens/GameScreen";
@@ -33,6 +34,15 @@ function CampusStack() {
   );
 }
 
+function ProductStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ProductenHome" component={ProductenScreen} />
+      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -50,13 +60,13 @@ export default function App() {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
 
-          tabBarActiveTintColor: "#93ca30", // ✅ GROEN
+          tabBarActiveTintColor: "#93ca30",
           tabBarInactiveTintColor: "#727271",
         })}
       >
         <Tab.Screen name="Home" component={MainHomeScreen} />
         <Tab.Screen name="Nieuws" component={HomeStack} />
-        <Tab.Screen name="Producten" component={ProductenScreen} />
+        <Tab.Screen name="Producten" component={ProductStack} />
         <Tab.Screen name="Campussen" component={CampusStack} />
         <Tab.Screen name="Game" component={GameScreen} />
       </Tab.Navigator>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import ProductCard from "../components/ProductCard";
 
-export default function ProductenScreen() {
+export default function ProductenScreen({ navigation }) {
   const [products, setProducts] = useState([]);
   console.log(products);
 
@@ -33,7 +33,9 @@ export default function ProductenScreen() {
       <FlatList
         data={products}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ProductCard item={item} />}
+        renderItem={({ item }) => (
+          <ProductCard item={item} navigation={navigation} />
+        )}
       />
     </View>
   );
